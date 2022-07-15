@@ -16,9 +16,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         let ciImage = CIImage(image: imageView.image!)//CIImage型に変換
         
-        let filter = CIFilter(name: "CIPhotoEffectMono")!//画像をモノクロにするフィルターを選択
+//        let filter = CIFilter(name: "CIPhotoEffectMono")!//画像をモノクロにするフィルターを選択
+        let filter = CIFilter(name: "CIBoxBlur")!//ぼかしのエフェクト
         filter.setDefaults()//フィルターの状態をデフォルトに戻す
         filter.setValue(ciImage, forKey: kCIInputImageKey)//フィルターに元の画像を指定する、画像であることを示すキー
+        filter.setValue(30, forKey: kCIInputRadiusKey)//ぼかしの強さ
         
         let outputImage = filter.outputImage
         imageView.image = UIImage(ciImage: outputImage!)
